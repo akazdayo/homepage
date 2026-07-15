@@ -2,14 +2,47 @@
 import { Icon } from "astro-icon/components";
 
 const icons = [
-  { name: "NixOS", icon: "simple-icons:nixos" },
-  { name: "Rust", icon: "simple-icons:rust" },
-  { name: "TypeScript", icon: "simple-icons:typescript" },
-  { name: "Python", icon: "simple-icons:python" },
-  { name: "Linux", icon: "simple-icons:linux" },
-  { name: "Vim", icon: "simple-icons:vim" },
-  { name: "VRChat", icon: "simple-icons:vrchat" },
-  { name: "Twitter", icon: "simple-icons:twitter" },
+  {
+    name: "NixOS",
+    icon: "simple-icons:nixos",
+    message: "設定をコードにして、どこでも同じ環境を再現できるところが好き！",
+  },
+  {
+    name: "Rust",
+    icon: "simple-icons:rust",
+    message: "コンパイラに怒られながら、安全で速いコードを書く練習中です。",
+  },
+  {
+    name: "TypeScript",
+    icon: "simple-icons:typescript",
+    message: "型に助けてもらいながら、Webのものを作るときによく使います。",
+  },
+  {
+    name: "Python",
+    icon: "simple-icons:python",
+    message:
+      "ちょっとした自動化から実験まで、思いついたものをすぐ形にできます。",
+  },
+  {
+    name: "Linux",
+    icon: "simple-icons:linux",
+    message: "気づけば日常のほとんどをLinuxの上で過ごしています。",
+  },
+  {
+    name: "Vim",
+    icon: "simple-icons:vim",
+    message: "キーボードから手を離さず、素早く編集できるのが気持ちいい！",
+  },
+  {
+    name: "VRChat",
+    icon: "simple-icons:vrchat",
+    message: "いろんなワールドを巡ったり、友だちとゆっくり話したりしています。",
+  },
+  {
+    name: "Twitter",
+    icon: "simple-icons:twitter",
+    message: "開発の進捗や日々のひとことを、気ままに投稿しています。",
+  },
 ] as const;
 ---
 
@@ -50,18 +83,19 @@ const icons = [
         aria-label="興味のある技術とサービス"
       >
         {
-          icons.map(({ name, icon }) => (
-            <li
-              class="flex aspect-square items-center justify-center"
-              title={name}
-            >
-              <Icon
-                name={icon}
-                class="block size-9"
-                title={name}
-                role="img"
-                aria-label={name}
-              />
+          icons.map(({ name, icon }, index) => (
+            <li class="flex aspect-square items-center justify-center">
+              <button
+                type="button"
+                class="flex size-full cursor-pointer items-center justify-center rounded-box transition-[background-color,transform] hover:bg-base-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-content"
+                title={`${name}について見る`}
+                aria-label={`${name}について見る`}
+                aria-haspopup="dialog"
+                aria-controls={`interest-modal-${index}`}
+                data-modal-target={`interest-modal-${index}`}
+              >
+                <Icon name={icon} class="block size-9" aria-hidden="true" />
+              </button>
             </li>
           ))
         }
@@ -100,4 +134,56 @@ const icons = [
       </ul>
     </div>
   </section>
+
+  {
+    icons.map(({ name, icon, message }, index) => (
+      <dialog
+        id={`interest-modal-${index}`}
+        class="modal"
+        aria-labelledby={`interest-modal-title-${index}`}
+      >
+        <div class="modal-box bg-base-100 text-base-content">
+          <div class="flex items-center gap-4">
+            <div class="flex size-12 shrink-0 items-center justify-center rounded-box bg-base-200">
+              <Icon name={icon} class="block size-7" aria-hidden="true" />
+            </div>
+            <h2
+              id={`interest-modal-title-${index}`}
+              class="m-0 text-xl font-medium"
+            >
+              {name}
+            </h2>
+          </div>
+          <p class="mt-5 leading-7">{message}</p>
+          <div class="modal-action">
+            <form method="dialog">
+              <button type="submit" class="btn btn-neutral">
+                閉じる
+              </button>
+            </form>
+          </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button type="submit" aria-label={`${name}のモーダルを閉じる`}>
+            閉じる
+          </button>
+        </form>
+      </dialog>
+    ))
+  }
 </main>
+
+<script>
+  document
+    .querySelectorAll<HTMLElement>("[data-modal-target]")
+    .forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const modalId = trigger.dataset.modalTarget;
+        const modal = modalId ? document.getElementById(modalId) : undefined;
+
+        if (modal instanceof HTMLDialogElement) {
+          modal.showModal();
+        }
+      });
+    });
+</script>
