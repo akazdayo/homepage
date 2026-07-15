@@ -1,0 +1,11 @@
+{
+  "names": {
+    "_": "1beecee55f69ebc2890403606f28b5e8ebbab23d226730e12b4bf762d29d2162"
+  },
+  "relays": {
+    "1beecee55f69ebc2890403606f28b5e8ebbab23d226730e12b4bf762d29d2162": [
+      "wss://yabu.me",
+      "wss://relay.damus.io"
+    ]
+  }
+}
