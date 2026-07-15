@@ -1,37 +1,97 @@
 ---
 type Career = {
-  period: string,
-  title: string,
-  label: string,
-  description: string,
+  period: Date;
+  title: string;
+  description: string;
 }[];
+
+const createPeriod = (year: number, month = 1, day = 1) => new Date(Date.UTC(year, month - 1, day));
+const formatPeriod = (period: Date) =>
+  new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(period);
 
 const career: Career = [
   {
-    period: "2025",
-    title: "未踏ジュニア'25",
-    label: "スーパークリエータ",
-    description: "自分の興味を起点に、技術で形にするプロジェクトに取り組んでいます。",
+    period: createPeriod(2026, 2, 17),
+    title: "動くWebアプリコンテスト 2025 冬",
+    description: "角川ドワンゴ学園のコンテストで、作品「PixelArt-Converter」により優秀賞を受賞。",
   },
   {
-    period: "現在",
+    period: createPeriod(2025, 12, 7),
+    title: "技育博2025 Vol. 5",
+    description: "サポーターズ主催。作品「MRSTUDY」で株式会社サイバーエージェント賞、ウイングアーク1st株式会社賞を受賞。",
+  },
+  {
+    period: createPeriod(2025, 11, 30),
+    title: "未踏ジュニア スーパークリエータ認定",
+    description: "Mitou Junior.の2025年度でスーパークリエータに認定されました。",
+  },
+  {
+    period: createPeriod(2025, 6),
+    title: "Hack 1 グランプリ",
+    description: "HackathonのHack 1 グランプリで日テレ賞を受賞。",
+  },
+  {
+    period: createPeriod(2025, 6),
+    title: "Coyote AI Competition",
+    description:
+      "名古屋大学非公認サークルjack主催のCoyote AI Competitionで準優勝。AIの社会実装をテーマに企画・開発。",
+  },
+  {
+    period: createPeriod(2025, 5),
+    title: "未踏ジュニア 25年度採択",
+    description:
+      "未踏ジュニアに採択。独立したLLMエージェントを複数体連携させ、会話することができるバックエンドフレームワークを開発。",
+  },
+  {
+    period: createPeriod(2025, 5),
+    title: "Hack with AI",
+    description: "Hackathonで、生成AIを活用したプロダクトにより準優勝。",
+  },
+  {
+    period: createPeriod(2025, 3),
+    title: "Garage Challenge 5th",
+    description: "HackathonのGarage Challenge 5thに参加。",
+  },
+  {
+    period: createPeriod(2025, 2, 15),
+    title: "Open Hack U 2025 Nagoya",
+    description: "Hackathonで最優秀賞、HappyHacking賞を受賞。LLMを用いた物理問題可視化Webアプリを開発。",
+  },
+  {
+    period: createPeriod(2025, 1),
+    title: "Startup Dragongate 2025",
+    description: "HackathonのStartup Dragongate 2025に参加。",
+  },
+  {
+    period: createPeriod(2025, 4, 1),
     title: "N高等学校",
-    label: "2年",
-    description: "学びながら、ソフトウェアやコンピュータの仕組みを深掘りしています。",
+    description: "",
   },
   {
-    period: "日々",
-    title: "個人開発",
-    label: "つくって、試す",
-    description: "Rust・TypeScript・Pythonを使って、気になったものを小さく実装しています。",
+    period: createPeriod(2024, 12),
+    title: "Hack the Nagoya",
+    description: "HackathonのHack the Nagoyaに参加。",
   },
   {
-    period: "これから",
-    title: "もっと遠くへ",
-    label: "進行中",
-    description: "NixOSやLinuxを含めた、自分らしい開発環境づくりも続けています。",
+    period: createPeriod(2023),
+    title: "アプリ甲子園",
+    description: "アプリ甲子園23年度で一次選考を突破し、プロダクトの完成度を評価された。",
   },
-] as const;
+  {
+    period: createPeriod(2025, 3, 31),
+    title: "N中等部",
+    description: "N中等部を卒業。オンラインでプログラミングを沢山学びました。",
+  },
+];
+
+const sortedCareer = [...career].sort(
+  (a, b) => b.period.getTime() - a.period.getTime(),
+);
 ---
 
 <section
@@ -54,24 +114,29 @@ const career: Career = [
     <div
       class="career-scroll min-h-0 flex-1 overflow-y-auto overscroll-contain scroll-smooth pr-2"
       tabindex="0"
-      aria-label="あかずの経歴"
+      aria-label="経歴"
     >
       <ol class="m-0 list-none border-l border-black/15 py-8 pl-6 sm:pl-8">
         {
-          career.map(({ period, title, label, description }) => (
-            <li class="relative pb-10 last:pb-2">
-              <span
-                class="absolute -left-[calc(1.5rem+5px)] top-1 size-2.5 rounded-full bg-[#121212] ring-4 ring-white sm:-left-[calc(2rem+5px)]"
-                aria-hidden="true"
-              ></span>
-              <p class="m-0 text-xs tracking-[0.18em] text-gray-500 uppercase">{period}</p>
-              <div class="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h3 class="m-0 text-xl leading-tight font-normal">{title}</h3>
-                <span class="text-sm text-gray-500">{label}</span>
-              </div>
-              <p class="m-0 mt-3 text-sm leading-7 text-gray-700">{description}</p>
-            </li>
-          ))
+          sortedCareer.map(({ period, title, description }) => {
+            const label = formatPeriod(period);
+
+            return (
+              <li class="relative pb-10 last:pb-2">
+                <span
+                  class="absolute -left-[calc(1.5rem+5px)] top-1 size-2.5 rounded-full bg-[#121212] ring-4 ring-white sm:-left-[calc(2rem+5px)]"
+                  aria-hidden="true"
+                ></span>
+                <p class="m-0 text-xs tracking-[0.18em] text-gray-500 uppercase">{label}</p>
+                <div class="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <h3 class="m-0 text-xl leading-tight font-normal">{title}</h3>
+                </div>
+                {description && (
+                  <p class="m-0 mt-3 text-sm leading-7 text-gray-700">{description}</p>
+                )}
+              </li>
+            );
+          })
         }
       </ol>
 
