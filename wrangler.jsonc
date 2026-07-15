@@ -5,9 +5,9 @@
   "workers_dev": true,
   "build": {
     "command": "pnpm build",
-    "watch_dir": "src"
+    "watch_dir": "src",
   },
   "assets": {
-    "directory": "./dist/"
-  }
+    "directory": "./dist/",
+  },
 }
