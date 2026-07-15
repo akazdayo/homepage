@@ -18,6 +18,8 @@
     "tailwindcss": "^4.3.2"
   },
   "devDependencies": {
+    "@iconify-json/simple-icons": "^1.2.90",
+    "astro-icon": "^1.1.5",
     "vite": "catalog:",
     "vite-plus": "catalog:"
   },
