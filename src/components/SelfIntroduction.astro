@@ -2,14 +2,22 @@
 import { Icon } from "astro-icon/components";
 
 const icons = [
-  { name: "NixOS", icon: "simple-icons:nixos" },
-  { name: "Rust", icon: "simple-icons:rust" },
-  { name: "TypeScript", icon: "simple-icons:typescript" },
-  { name: "Python", icon: "simple-icons:python" },
-  { name: "Linux", icon: "simple-icons:linux" },
-  { name: "Vim", icon: "simple-icons:vim" },
-  { name: "VRChat", icon: "simple-icons:vrchat" },
-  { name: "Twitter", icon: "simple-icons:twitter" },
+  { name: "NixOS", icon: "simple-icons:nixos", coloredIcon: "devicon:nixos" },
+  { name: "Rust", icon: "simple-icons:rust", coloredIcon: "logos:rust" },
+  {
+    name: "TypeScript",
+    icon: "simple-icons:typescript",
+    coloredIcon: "logos:typescript-icon",
+  },
+  { name: "Python", icon: "simple-icons:python", coloredIcon: "logos:python" },
+  { name: "Linux", icon: "simple-icons:linux", coloredIcon: "logos:linux-tux" },
+  { name: "Vim", icon: "simple-icons:vim", coloredIcon: "logos:vim" },
+  {
+    name: "VRChat",
+    icon: "simple-icons:vrchat",
+    coloredIcon: "simple-icons:vrchat",
+  },
+  { name: "Twitter", icon: "simple-icons:twitter", coloredIcon: "logos:twitter" },
 ] as const;
 ---
 
@@ -44,15 +52,22 @@ const icons = [
             aria-label="興味のある技術とサービス"
           >
             {
-              icons.map(({ name, icon }) => (
+              icons.map(({ name, icon, coloredIcon }) => (
                 <li class="flex aspect-square items-center justify-center" title={name}>
-                  <Icon
-                    name={icon}
-                    class="block size-9"
-                    title={name}
-                    role="img"
-                    aria-label={name}
-                  />
+                  <span class="group relative block size-9">
+                    <Icon
+                      name={icon}
+                      class="block size-9 transition-opacity duration-200 group-hover:opacity-0"
+                      title={name}
+                      role="img"
+                      aria-label={name}
+                    />
+                    <Icon
+                      name={coloredIcon}
+                      class="absolute inset-0 block size-9 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                      aria-hidden="true"
+                    />
+                  </span>
                 </li>
               ))
             }
