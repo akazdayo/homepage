@@ -5,7 +5,8 @@ type Career = {
   description: string;
 }[];
 
-const createPeriod = (year: number, month = 1, day = 1) => new Date(Date.UTC(year, month - 1, day));
+const createPeriod = (year: number, month = 1, day = 1) =>
+  new Date(Date.UTC(year, month - 1, day));
 const formatPeriod = (period: Date) =>
   new Intl.DateTimeFormat("en-GB", {
     day: "numeric",
@@ -18,17 +19,20 @@ const career: Career = [
   {
     period: createPeriod(2026, 2, 17),
     title: "動くWebアプリコンテスト 2025 冬",
-    description: "角川ドワンゴ学園のコンテストで、作品「PixelArt-Converter」により優秀賞を受賞。",
+    description:
+      "角川ドワンゴ学園のコンテストで、作品「PixelArt-Converter」により優秀賞を受賞。",
   },
   {
     period: createPeriod(2025, 12, 7),
     title: "技育博2025 Vol. 5",
-    description: "サポーターズ主催。作品「MRSTUDY」で株式会社サイバーエージェント賞、ウイングアーク1st株式会社賞を受賞。",
+    description:
+      "サポーターズ主催。作品「MRSTUDY」で株式会社サイバーエージェント賞、ウイングアーク1st株式会社賞を受賞。",
   },
   {
     period: createPeriod(2025, 11, 30),
     title: "未踏ジュニア スーパークリエータ認定",
-    description: "Mitou Junior.の2025年度でスーパークリエータに認定されました。",
+    description:
+      "Mitou Junior.の2025年度でスーパークリエータに認定されました。",
   },
   {
     period: createPeriod(2025, 6),
@@ -60,7 +64,8 @@ const career: Career = [
   {
     period: createPeriod(2025, 2, 15),
     title: "Open Hack U 2025 Nagoya",
-    description: "Hackathonで最優秀賞、HappyHacking賞を受賞。LLMを用いた物理問題可視化Webアプリを開発。",
+    description:
+      "Hackathonで最優秀賞、HappyHacking賞を受賞。LLMを用いた物理問題可視化Webアプリを開発。",
   },
   {
     period: createPeriod(2025, 1),
@@ -80,7 +85,8 @@ const career: Career = [
   {
     period: createPeriod(2023),
     title: "アプリ甲子園",
-    description: "アプリ甲子園23年度で一次選考を突破し、プロダクトの完成度を評価された。",
+    description:
+      "アプリ甲子園23年度で一次選考を突破し、プロダクトの完成度を評価された。",
   },
   {
     period: createPeriod(2025, 3, 31),
@@ -101,14 +107,21 @@ const sortedCareer = [...career].sort(
   <div
     class="flex h-full w-full max-w-none min-h-0 flex-col min-[900px]:px-[clamp(1rem,3vw,3rem)]"
   >
-    <div class="flex flex-none items-end justify-between gap-6 border-b border-black/10 pb-5">
+    <div
+      class="flex flex-none items-end justify-between gap-6 border-b border-black/10 pb-5"
+    >
       <div>
         <p class="m-0 text-sm text-gray-500">Profile / history</p>
-        <h2 id="career-section-title" class="mt-3 mb-0 text-3xl leading-tight font-normal">
+        <h2
+          id="career-section-title"
+          class="mt-3 mb-0 text-3xl leading-tight font-normal"
+        >
           経歴
         </h2>
       </div>
-      <span class="hidden pb-1 text-xs text-gray-500 sm:block">scroll to explore</span>
+      <span class="hidden pb-1 text-xs text-gray-500 sm:block"
+        >scroll to explore</span
+      >
     </div>
 
     <div
@@ -126,13 +139,17 @@ const sortedCareer = [...career].sort(
                 <span
                   class="absolute -left-[calc(1.5rem+5px)] top-1 size-2.5 rounded-full bg-[#121212] ring-4 ring-white sm:-left-[calc(2rem+5px)]"
                   aria-hidden="true"
-                ></span>
-                <p class="m-0 text-xs tracking-[0.18em] text-gray-500 uppercase">{label}</p>
+                />
+                <p class="m-0 text-xs tracking-[0.18em] text-gray-500 uppercase">
+                  {label}
+                </p>
                 <div class="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <h3 class="m-0 text-xl leading-tight font-normal">{title}</h3>
                 </div>
                 {description && (
-                  <p class="m-0 mt-3 text-sm leading-7 text-gray-700">{description}</p>
+                  <p class="m-0 mt-3 text-sm leading-7 text-gray-700">
+                    {description}
+                  </p>
                 )}
               </li>
             );
@@ -140,7 +157,9 @@ const sortedCareer = [...career].sort(
         }
       </ol>
 
-      <p class="m-0 border-t border-black/10 py-5 text-center text-xs text-gray-500">
+      <p
+        class="m-0 border-t border-black/10 py-5 text-center text-xs text-gray-500"
+      >
         まだまだ、これから。
       </p>
     </div>

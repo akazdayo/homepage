@@ -13,73 +13,91 @@ const icons = [
 ] as const;
 ---
 
-    <main
-      class="mx-auto grid min-h-dvh w-full grid-cols-1 bg-white px-6 py-10 text-base leading-7 sm:px-10 min-[900px]:grid-cols-2 min-[900px]:px-[clamp(3.5rem,6vw,7rem)] min-[900px]:py-[clamp(2.5rem,6vh,5rem)] xl:max-w-[1440px]"
-      aria-label="あかずの自己紹介"
-    >
-      <section
-        class="flex min-h-0 min-w-0 items-center justify-center px-0 py-4 sm:px-8 min-[900px]:px-[clamp(1rem,3vw,3rem)] min-[900px]:py-0"
+<main
+  class="mx-auto grid min-h-dvh w-full grid-cols-1 bg-white px-6 py-10 text-base leading-7 sm:px-10 min-[900px]:grid-cols-2 min-[900px]:px-[clamp(3.5rem,6vw,7rem)] min-[900px]:py-[clamp(2.5rem,6vh,5rem)] xl:max-w-[1440px]"
+  aria-label="あかずの自己紹介"
+>
+  <section
+    class="flex min-h-0 min-w-0 items-center justify-center px-0 py-4 sm:px-8 min-[900px]:px-[clamp(1rem,3vw,3rem)] min-[900px]:py-0"
+  >
+    <div class="w-full max-w-md">
+      <div
+        class="flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:gap-6 sm:text-left"
       >
-        <div class="w-full max-w-md">
+        <img
+          class="block size-32 flex-none rounded-full object-cover"
+          src="/akazdayo.png"
+          alt="あかず"
+          width="128"
+          height="128"
+        />
+        <div class="min-w-0">
           <div
-            class="flex flex-col items-center justify-center gap-4 text-center sm:flex-row sm:gap-6 sm:text-left"
+            class="flex items-baseline justify-center gap-3 sm:justify-start"
           >
-            <img
-              class="block size-32 flex-none rounded-full object-cover"
-              src="/akazdayo.png"
-              alt="あかず"
-              width="128"
-              height="128"
-            />
-            <div class="min-w-0">
-              <div class="flex items-baseline justify-center gap-3 sm:justify-start">
-                <h1 class="m-0 text-3xl leading-[1.75] font-normal text-black">あかず</h1>
-              </div>
-          <p class="m-0 mt-1 text-sm sm:whitespace-nowrap">常日頃から家にいるときも家に帰りたいと考えています。</p>
-            </div>
+            <h1 class="m-0 text-3xl leading-[1.75] font-normal text-black">
+              あかず
+            </h1>
           </div>
-
-          <ul
-            class="mt-8 grid w-full list-none grid-cols-4 grid-rows-2 gap-3 p-0"
-            aria-label="興味のある技術とサービス"
-          >
-            {
-              icons.map(({ name, icon }) => (
-                <li class="flex aspect-square items-center justify-center" title={name}>
-                  <Icon
-                    name={icon}
-                    class="block size-9"
-                    title={name}
-                    role="img"
-                    aria-label={name}
-                  />
-                </li>
-              ))
-            }
-          </ul>
+          <p class="m-0 mt-1 text-sm sm:whitespace-nowrap">
+            常日頃から家にいるときも家に帰りたいと考えています。
+          </p>
         </div>
-      </section>
+      </div>
 
-      <section
-        class="mt-8 flex min-h-0 min-w-0 flex-col justify-start gap-8 border-t border-black/10 px-0 py-8 min-[900px]:mt-0 min-[900px]:justify-center min-[900px]:gap-[clamp(3rem,10vh,7rem)] min-[900px]:border-0 min-[900px]:px-[clamp(1rem,3vw,3rem)] min-[900px]:py-0"
+      <ul
+        class="mt-8 grid w-full list-none grid-cols-4 grid-rows-2 gap-3 p-0"
+        aria-label="興味のある技術とサービス"
       >
-        <div>
-          <h2 class="my-4 text-[1.1rem] leading-6 font-normal">まいぶーむ！</h2>
-          <ul class="m-0 list-[square] pl-[22px] text-sm leading-[1.75] [&>li+li]:mt-1">
-            <li>最近はNixオタクになりぎみ、すべてをNix, NixOSにしようと頑張ってる。</li>
-            <li>VRChatとosu!にハマってるかも</li>
-          </ul>
-        </div>
+        {
+          icons.map(({ name, icon }) => (
+            <li
+              class="flex aspect-square items-center justify-center"
+              title={name}
+            >
+              <Icon
+                name={icon}
+                class="block size-9"
+                title={name}
+                role="img"
+                aria-label={name}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 
-        <div>
-          <h2 class="my-4 text-[1.1rem] leading-6 font-normal">そーしゃるねっとわーく！</h2>
-          <ul
-            class="m-0 list-[square] pl-[22px] text-sm leading-[1.75] [&>li+li]:mt-1"
+  <section
+    class="mt-8 flex min-h-0 min-w-0 flex-col justify-start gap-8 border-t border-black/10 px-0 py-8 min-[900px]:mt-0 min-[900px]:justify-center min-[900px]:gap-[clamp(3rem,10vh,7rem)] min-[900px]:border-0 min-[900px]:px-[clamp(1rem,3vw,3rem)] min-[900px]:py-0"
+  >
+    <div>
+      <h2 class="my-4 text-[1.1rem] leading-6 font-normal">まいぶーむ！</h2>
+      <ul
+        class="m-0 list-[square] pl-[22px] text-sm leading-[1.75] [&>li+li]:mt-1"
+      >
+        <li>
+          最近はNixオタクになりぎみ、すべてをNix, NixOSにしようと頑張ってる。
+        </li>
+        <li>VRChatとosu!にハマってるかも</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="my-4 text-[1.1rem] leading-6 font-normal">
+        そーしゃるねっとわーく！
+      </h2>
+      <ul
+        class="m-0 list-[square] pl-[22px] text-sm leading-[1.75] [&>li+li]:mt-1"
+      >
+        <li>Twitter: <a href="https://x.com/akazdango">@akazdango</a></li>
+        <li>
+          Nostr(NIP-05): <a href="https://nostter.app/odango.app">@odango.app</a
           >
-            <li>Twitter: <a href="https://x.com/akazdango">@akazdango</a></li>
-            <li>Nostr(NIP-05): <a href="https://nostter.app/odango.app">@odango.app</a></li>
-            <li>GitHub: <a href="https://github.com/akazdayo">@akazdayo</a></li>
-          </ul>
-        </div>
-      </section>
-    </main>
+        </li>
+        <li>GitHub: <a href="https://github.com/akazdayo">@akazdayo</a></li>
+      </ul>
+    </div>
+  </section>
+</main>

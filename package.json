@@ -12,7 +12,8 @@
     "astro": "astro",
     "check": "vp check",
     "lint": "vp lint",
-    "fmt": "vp fmt",
+    "fmt": "vp fmt && prettier --write \"**/*.astro\"",
+    "fmt:check": "vp fmt --check && prettier --check \"**/*.astro\"",
     "test": "vp test"
   },
   "dependencies": {
@@ -23,6 +24,8 @@
   "devDependencies": {
     "@iconify-json/simple-icons": "^1.2.90",
     "astro-icon": "^1.1.5",
+    "prettier": "3.9.5",
+    "prettier-plugin-astro": "0.14.1",
     "vite": "catalog:",
     "vite-plus": "catalog:",
     "wrangler": "^4.110.0"
