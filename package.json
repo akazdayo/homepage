@@ -4,8 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "dev:worker": "wrangler dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "wrangler deploy",
+    "deploy:dry-run": "wrangler deploy --dry-run",
     "astro": "astro",
     "check": "vp check",
     "lint": "vp lint",
@@ -21,7 +24,8 @@
     "@iconify-json/simple-icons": "^1.2.90",
     "astro-icon": "^1.1.5",
     "vite": "catalog:",
-    "vite-plus": "catalog:"
+    "vite-plus": "catalog:",
+    "wrangler": "^4.110.0"
   },
   "devEngines": {
     "packageManager": {
