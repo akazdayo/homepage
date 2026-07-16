@@ -1,47 +1,39 @@
 ---
 import { Icon } from "astro-icon/components";
+import { allMessages } from "./ClickMessages/clickMessage";
 
 const icons = [
   {
     name: "NixOS",
     icon: "simple-icons:nixos",
-    message: "設定をコードにして、どこでも同じ環境を再現できるところが好き！",
   },
   {
     name: "Rust",
     icon: "simple-icons:rust",
-    message: "コンパイラに怒られながら、安全で速いコードを書く練習中です。",
   },
   {
     name: "TypeScript",
     icon: "simple-icons:typescript",
-    message: "型に助けてもらいながら、Webのものを作るときによく使います。",
   },
   {
     name: "Python",
     icon: "simple-icons:python",
-    message:
-      "ちょっとした自動化から実験まで、思いついたものをすぐ形にできます。",
   },
   {
     name: "Linux",
     icon: "simple-icons:linux",
-    message: "気づけば日常のほとんどをLinuxの上で過ごしています。",
   },
   {
     name: "Vim",
     icon: "simple-icons:vim",
-    message: "キーボードから手を離さず、素早く編集できるのが気持ちいい！",
   },
   {
     name: "VRChat",
     icon: "simple-icons:vrchat",
-    message: "いろんなワールドを巡ったり、友だちとゆっくり話したりしています。",
   },
   {
     name: "Twitter",
     icon: "simple-icons:twitter",
-    message: "開発の進捗や日々のひとことを、気ままに投稿しています。",
   },
 ] as const;
 ---
@@ -73,7 +65,7 @@ const icons = [
             </h1>
           </div>
           <p class="m-0 mt-1 text-sm">
-            常日頃から家にいるときも家に帰りたい<br/>と考えています。
+            常日頃から家にいるときも家に帰りたい<br />と考えています。
           </p>
         </div>
       </div>
@@ -136,7 +128,7 @@ const icons = [
   </section>
 
   {
-    icons.map(({ name, icon, message }, index) => (
+    icons.map(({ name, icon }, index) => (
       <dialog
         id={`interest-modal-${index}`}
         class="modal"
@@ -154,7 +146,7 @@ const icons = [
               {name}
             </h2>
           </div>
-          <p class="mt-5 leading-7">{message}</p>
+          <div class="mt-5 leading-7" set:html={allMessages[name].content}></div>
           <div class="modal-action">
             <form method="dialog">
               <button type="submit" class="btn btn-neutral">
