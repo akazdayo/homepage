@@ -1,0 +1,252 @@
+---
+const presentationsUrl =
+  "https://akazdayo.github.io/presentations/.well-known/presentations.json";
+---
+
+<section
+  class="mx-auto flex w-full max-w-none justify-center bg-base-100 px-6 py-16 text-left text-base-content sm:px-10 min-[900px]:px-[clamp(3.5rem,6vw,7rem)] min-[900px]:py-[clamp(4rem,8vh,7rem)]"
+  aria-labelledby="presentations-section-title"
+  data-presentations-section
+  data-presentations-url={presentationsUrl}
+>
+  <div
+    class="flex w-full max-w-none flex-col min-[900px]:px-[clamp(1rem,3vw,3rem)]"
+  >
+    <div
+      class="flex items-end justify-between gap-6 border-b border-base-content/10 pb-5"
+    >
+      <div>
+        <p class="m-0 text-sm text-base-content/55">Works / archive</p>
+        <h2
+          id="presentations-section-title"
+          class="mt-3 mb-0 text-3xl leading-tight font-normal"
+        >
+          Presentations
+        </h2>
+      </div>
+      <span
+        class="hidden pb-1 text-xs text-base-content/55 sm:block"
+        data-presentations-count
+        aria-live="polite"
+      >
+        Loading…
+      </span>
+    </div>
+
+    <p
+      class="m-0 py-12 text-center text-sm text-base-content/55"
+      data-presentations-status
+      aria-live="polite"
+    >
+      発表資料を読み込んでいます…
+    </p>
+
+    <ol
+      id="presentations-list"
+      class="m-0 hidden list-none grid-cols-1 gap-4 pt-8 p-0"
+      aria-label="発表資料"
+      data-presentations-list
+    >
+    </ol>
+
+    <div
+      class="mt-8 flex justify-center border-t border-base-content/10 pt-6"
+      data-presentations-toggle-wrapper
+      hidden
+    >
+      <button
+        type="button"
+        class="group inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-base-content/15 bg-base-100 px-5 py-2.5 text-sm transition-colors hover:bg-base-200/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-base-content"
+        aria-controls="presentations-list"
+        aria-expanded="false"
+        data-presentations-toggle
+      >
+        <span class="group-aria-expanded:hidden">すべての発表資料を見る</span>
+        <span class="hidden group-aria-expanded:inline">発表資料を閉じる</span>
+        <svg
+          class="size-4 transition-transform duration-300 group-aria-expanded:rotate-180"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+        >
+          <path d="m5 7.5 5 5 5-5"></path>
+        </svg>
+      </button>
+    </div>
+
+    <noscript>
+      <p class="m-0 pt-8 text-sm leading-7 text-base-content/65">
+        発表資料の一覧は
+        <a
+          class="underline decoration-base-content/30 underline-offset-4 transition-colors hover:decoration-base-content focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-base-content"
+          href={presentationsUrl}
+        >
+          presentations.json
+        </a>
+        から確認できます。
+      </p>
+    </noscript>
+  </div>
+</section>
+
+<script>
+  type Presentation = {
+    url: string;
+    title: string;
+    date: string;
+  };
+
+  const visiblePresentationCount = 4;
+
+  const isPresentation = (value: unknown): value is Presentation => {
+    if (typeof value !== "object" || value === null) return false;
+
+    const presentation = value as Record<string, unknown>;
+    if (
+      typeof presentation.url !== "string" ||
+      typeof presentation.title !== "string" ||
+      typeof presentation.date !== "string"
+    ) {
+      return false;
+    }
+
+    try {
+      const url = new URL(presentation.url);
+      return url.protocol === "https:" || url.protocol === "http:";
+    } catch {
+      return false;
+    }
+  };
+
+  const createPresentationItem = (
+    { url, title, date }: Presentation,
+    index: number,
+  ) => {
+    const item = document.createElement("li");
+    const link = document.createElement("a");
+    const content = document.createElement("span");
+    const time = document.createElement("time");
+    const heading = document.createElement("h3");
+
+    const isExtra = index >= visiblePresentationCount;
+
+    item.className = "min-w-0";
+    item.hidden = isExtra;
+    if (isExtra) item.dataset.presentationsExtra = "";
+    link.className =
+      "group flex h-full min-h-24 items-start justify-between gap-6 rounded-2xl border border-base-content/10 bg-base-100 p-4 text-inherit no-underline transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-base-200/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-base-content sm:px-5 sm:py-4";
+    link.href = url;
+    link.ariaLabel = `${title}の発表資料を開く`;
+
+    content.className = "flex min-w-0 flex-col";
+    time.className = "text-xs tracking-[0.16em] text-base-content/55 uppercase";
+    time.textContent = date;
+    if (/^\d{4}(?:-\d{2}){0,2}$/.test(date)) time.dateTime = date;
+
+    heading.className = "mt-2 text-lg leading-7 sm:text-xl";
+    heading.textContent = title;
+
+    content.append(time, heading);
+
+    const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    icon.setAttribute(
+      "class",
+      "mt-0.5 size-5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5",
+    );
+    icon.setAttribute("viewBox", "0 0 20 20");
+    icon.setAttribute("fill", "none");
+    icon.setAttribute("stroke", "currentColor");
+    icon.setAttribute("stroke-width", "1.5");
+    icon.setAttribute("aria-hidden", "true");
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "M6 14 14 6m0 0H8m6 0v6");
+    icon.append(path);
+
+    link.append(content, icon);
+    item.append(link);
+    return item;
+  };
+
+  document
+    .querySelectorAll<HTMLElement>("[data-presentations-section]")
+    .forEach(async (section) => {
+      const sourceUrl = section.dataset.presentationsUrl;
+      const list = section.querySelector<HTMLOListElement>(
+        "[data-presentations-list]",
+      );
+      const status = section.querySelector<HTMLElement>(
+        "[data-presentations-status]",
+      );
+      const count = section.querySelector<HTMLElement>(
+        "[data-presentations-count]",
+      );
+      const toggleWrapper = section.querySelector<HTMLElement>(
+        "[data-presentations-toggle-wrapper]",
+      );
+      const toggle = section.querySelector<HTMLButtonElement>(
+        "[data-presentations-toggle]",
+      );
+
+      if (
+        !sourceUrl ||
+        !list ||
+        !status ||
+        !count ||
+        !toggleWrapper ||
+        !toggle
+      ) {
+        return;
+      }
+
+      try {
+        const response = await fetch(sourceUrl);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        const value: unknown = await response.json();
+        if (!Array.isArray(value)) throw new Error("Invalid response shape");
+
+        const presentations = value.filter(isPresentation).reverse();
+        if (presentations.length === 0) {
+          status.textContent = "公開中の発表資料はまだありません。";
+          count.textContent = "0 entries";
+          return;
+        }
+
+        list.append(...presentations.map(createPresentationItem));
+        list.classList.remove("hidden");
+        list.classList.add("grid");
+        status.hidden = true;
+        count.textContent = `${presentations.length} entries`;
+
+        if (presentations.length > visiblePresentationCount) {
+          toggleWrapper.hidden = false;
+          const extraItems = list.querySelectorAll<HTMLElement>(
+            "[data-presentations-extra]",
+          );
+
+          toggle.addEventListener("click", () => {
+            const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+
+            toggle.setAttribute("aria-expanded", String(!isExpanded));
+            extraItems.forEach((item) => {
+              item.hidden = isExpanded;
+            });
+          });
+        }
+      } catch (error) {
+        console.error("Failed to load presentations", error);
+        status.textContent = "発表資料を読み込めませんでした。";
+        count.textContent = "Unavailable";
+
+        const retryLink = document.createElement("a");
+        retryLink.className =
+          "ml-2 underline decoration-base-content/30 underline-offset-4 transition-colors hover:decoration-base-content focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-base-content";
+        retryLink.href = sourceUrl;
+        retryLink.textContent = "一覧を直接開く";
+        status.append(retryLink);
+      }
+    });
+</script>
