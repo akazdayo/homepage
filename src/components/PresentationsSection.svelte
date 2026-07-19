@@ -107,6 +107,8 @@
         <a
           class="ml-2 underline decoration-base-content/30 underline-offset-4 transition-colors hover:decoration-base-content focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-base-content"
           href={presentationsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           一覧を直接開く
         </a>
@@ -132,6 +134,8 @@
             <a
               class="group flex h-full min-h-24 items-start justify-between gap-6 rounded-2xl border border-base-content/10 bg-base-100 p-4 text-inherit no-underline transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-base-200/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-base-content sm:px-5 sm:py-4"
               href={presentation.url}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label={`${presentation.title}の発表資料を開く`}
             >
               <span class="flex min-w-0 flex-col">
