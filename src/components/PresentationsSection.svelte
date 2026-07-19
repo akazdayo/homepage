@@ -7,8 +7,11 @@
     date: string;
   };
 
-  const presentationsUrl =
+  const presentationsSourceUrl =
     "https://akazdayo.github.io/presentations/.well-known/presentations.json";
+  const presentationsUrl = import.meta.env.DEV
+    ? presentationsSourceUrl
+    : "/api/presentations";
   const visiblePresentationCount = 4;
 
   let presentations = $state<Presentation[]>([]);
