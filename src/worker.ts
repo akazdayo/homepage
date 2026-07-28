@@ -1,9 +1,12 @@
 const presentationsPath = "/api/presentations";
+const browserCacheTtlSeconds = 60;
 const edgeCacheTtlSeconds = 10 * 60;
+const staleWhileRevalidateSeconds = 60 * 60;
 
 const presentationResponseHeaders = (upstream?: Response) => {
   const headers = new Headers({
-    "Cache-Control": "public, max-age=60",
+    "Cache-Control": `public, max-age=${browserCacheTtlSeconds}, stale-while-revalidate=${staleWhileRevalidateSeconds}`,
+    "Cloudflare-CDN-Cache-Control": `public, max-age=${edgeCacheTtlSeconds}, stale-while-revalidate=${staleWhileRevalidateSeconds}`,
     "Content-Type": "application/json; charset=utf-8",
     "X-Content-Type-Options": "nosniff",
   });

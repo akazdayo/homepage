@@ -8,6 +8,9 @@
     "command": "pnpm build",
     "watch_dir": "src",
   },
+  "cache": {
+    "enabled": true,
+  },
   "assets": {
     "directory": "./dist/",
     "binding": "ASSETS",
