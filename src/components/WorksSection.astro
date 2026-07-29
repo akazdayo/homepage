@@ -41,20 +41,20 @@ const otherWorks = [
 
 <section
   id="works"
-  class="mx-auto flex w-full max-w-none justify-center bg-white px-6 py-16 text-left sm:px-10 min-[900px]:px-[clamp(3.5rem,6vw,7rem)] min-[900px]:py-[clamp(4rem,8vh,7rem)]"
+  class="mx-auto flex w-full max-w-none justify-center bg-white px-6 py-16 text-left sm:px-10 min-[900px]:min-h-dvh min-[900px]:items-center min-[900px]:px-[clamp(3.5rem,6vw,7rem)] min-[900px]:py-[clamp(2rem,4vh,3rem)]"
   aria-labelledby="works-section-title"
 >
   <div
     class="flex w-full max-w-none flex-col min-[900px]:px-[clamp(1rem,3vw,3rem)]"
   >
     <div
-      class="flex items-end justify-between gap-6 border-b border-black/10 pb-5"
+      class="flex items-end justify-between gap-6 border-b border-black/10 pb-5 min-[900px]:pb-4"
     >
       <div>
         <p class="m-0 text-sm text-gray-500">Works / selected</p>
         <h2
           id="works-section-title"
-          class="mt-3 mb-0 text-3xl leading-tight font-normal"
+          class="mt-3 mb-0 text-3xl leading-tight font-normal min-[900px]:mt-2"
         >
           作品
         </h2>
@@ -62,170 +62,191 @@ const otherWorks = [
       <span class="hidden pb-1 text-xs text-gray-500 sm:block">3 projects</span>
     </div>
 
-    <article
-      class="grid gap-8 border-b border-black/10 py-10 min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] min-[900px]:items-stretch min-[900px]:gap-[clamp(2.5rem,5vw,6rem)] min-[900px]:py-14"
-    >
-      <div
-        class="work-preview featured-preview min-h-64 overflow-hidden rounded-3xl bg-[#f1f0eb] sm:min-h-80"
-        aria-hidden="true"
+    <div class="min-[900px]:mt-6">
+      <article
+        class="grid gap-8 border-b border-black/10 py-10 min-[900px]:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] min-[900px]:items-stretch min-[900px]:gap-[clamp(2rem,4vw,4rem)] min-[900px]:pt-0 min-[900px]:pb-6"
       >
-        <div class="featured-preview__header">
-          <span>SELECTED WORK</span>
-          <span>01 / 03</span>
-        </div>
-        <div class="featured-preview__mark">
-          <span class="featured-preview__eyebrow">PROJECT 2025</span>
-          <span class="featured-preview__title">MR<br />STUDY</span>
-        </div>
-        <div class="featured-preview__footer">
-          <span>TEAM DEVELOPMENT</span>
-          <span class="featured-preview__dot"></span>
-          <span>AWARD WINNER</span>
-        </div>
-      </div>
-
-      <div class="flex min-w-0 flex-col justify-center">
-        <p class="m-0 text-xs tracking-[0.16em] text-gray-500 uppercase">
-          {featuredWork.year} / {featuredWork.category}
-        </p>
-        <h3
-          class="mt-4 mb-0 text-[clamp(2rem,4vw,3.75rem)] leading-none font-normal tracking-[-0.04em]"
+        <div
+          class="work-preview featured-preview aspect-[16/9] w-full overflow-hidden rounded-3xl bg-[#f1f0eb] min-[900px]:rounded-2xl"
+          aria-hidden="true"
         >
-          {featuredWork.title}
-        </h3>
-        <p class="mt-6 mb-0 max-w-xl text-sm leading-7 text-gray-700">
-          {featuredWork.description}
-        </p>
-
-        <div class="mt-8 border-l-2 border-black pl-4">
-          <p class="m-0 text-xs tracking-[0.12em] text-gray-500 uppercase">
-            Awards
-          </p>
-          <ul class="mt-2 mb-0 list-none space-y-1 p-0 text-sm leading-6">
-            {
-              featuredWork.awards.map((award) => (
-                <li>{award}</li>
-              ))
-            }
-          </ul>
+          <div class="featured-preview__header">
+            <span>SELECTED WORK</span>
+            <span>01 / 03</span>
+          </div>
+          <div class="featured-preview__mark">
+            <span class="featured-preview__eyebrow">PROJECT 2025</span>
+            <span class="featured-preview__title">MR<br />STUDY</span>
+          </div>
+          <div class="featured-preview__footer">
+            <span>TEAM DEVELOPMENT</span>
+            <span class="featured-preview__dot"></span>
+            <span>AWARD WINNER</span>
+          </div>
         </div>
 
-        <a
-          class="group mt-10 inline-flex w-fit items-center gap-3 text-sm text-black no-underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
-          href="#career-section-title"
-        >
-          <span
-            class="border-b border-black/30 pb-1 transition-colors group-hover:border-black"
-          >
-            受賞歴を見る
-          </span>
-          <span
-            class="transition-transform group-hover:translate-x-0.5"
-            aria-hidden="true">↓</span
-          >
-        </a>
-      </div>
-    </article>
-
-    <div class="grid grid-cols-1 min-[760px]:grid-cols-2">
-      {
-        otherWorks.map((work, index) => (
-          <article
-            class:list={[
-              "flex min-w-0 flex-col py-10 min-[760px]:py-12",
-              index === 0
-                ? "border-b border-black/10 min-[760px]:border-r min-[760px]:border-b-0 min-[760px]:pr-8 min-[900px]:pr-[clamp(2rem,4vw,4.5rem)]"
-                : "min-[760px]:pl-8 min-[900px]:pl-[clamp(2rem,4vw,4.5rem)]",
-            ]}
-          >
-            <div
-              class:list={[
-                "work-preview relative aspect-[16/10] overflow-hidden rounded-2xl bg-[#f1f0eb]",
-                `${work.preview}-preview`,
-              ]}
-              aria-hidden="true"
+        <div class="flex min-w-0 flex-col justify-center">
+          <div>
+            <p class="m-0 text-xs tracking-[0.16em] text-gray-500 uppercase">
+              {featuredWork.year} / {featuredWork.category}
+            </p>
+            <h3
+              class="mt-4 mb-0 text-[clamp(2rem,4vw,3.75rem)] leading-none font-normal tracking-[-0.04em] min-[900px]:mt-3 min-[900px]:text-[clamp(2rem,3vw,3rem)]"
             >
-              {work.preview === "pixelart" ? (
-                <div class="pixelart-preview__inner">
-                  <div class="pixelart-preview__bar">
-                    <span>IMAGE</span>
-                    <span>PIXEL</span>
-                  </div>
-                  <div class="pixelart-preview__stage">
-                    <div class="pixelart-preview__source">
-                      <span class="pixelart-preview__sun" />
-                      <span class="pixelart-preview__mountain pixelart-preview__mountain--back" />
-                      <span class="pixelart-preview__mountain pixelart-preview__mountain--front" />
-                    </div>
-                    <span class="pixelart-preview__arrow">→</span>
-                    <div class="pixelart-preview__result">
-                      {Array.from({ length: 48 }).map(() => <span />)}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div class="agents-preview__inner">
-                  <p>INDEPENDENT AGENTS / NETWORK</p>
-                  <div class="agents-preview__network">
-                    <span class="agents-preview__line agents-preview__line--one" />
-                    <span class="agents-preview__line agents-preview__line--two" />
-                    <span class="agents-preview__line agents-preview__line--three" />
-                    <span class="agents-preview__node agents-preview__node--one">
-                      01
-                    </span>
-                    <span class="agents-preview__node agents-preview__node--two">
-                      02
-                    </span>
-                    <span class="agents-preview__node agents-preview__node--three">
-                      03
-                    </span>
-                    <span class="agents-preview__center">LLM</span>
-                  </div>
-                </div>
-              )}
-            </div>
+              {featuredWork.title}
+            </h3>
+          </div>
 
-            <div class="flex flex-1 flex-col pt-6">
-              <p class="m-0 text-xs tracking-[0.16em] text-gray-500 uppercase">
-                {work.year} / {work.category}
-              </p>
-              <h3 class="mt-3 mb-0 text-2xl leading-tight font-normal">
-                {work.title}
-              </h3>
-              <p class="mt-4 mb-0 text-sm leading-7 text-gray-700">
-                {work.description}
-              </p>
+          <div class="min-[900px]:mt-4">
+            <p
+              class="mt-6 mb-0 max-w-xl text-sm leading-7 text-gray-700 min-[900px]:mt-0 min-[900px]:text-[0.7rem] min-[900px]:leading-5"
+            >
+              {featuredWork.description}
+            </p>
+
+            <div
+              class="mt-8 border-l-2 border-black pl-4 min-[900px]:mt-4 min-[900px]:pl-3"
+            >
               <p
-                class="mt-5 mb-0 rounded-xl bg-[#f6f5f1] px-4 py-3 text-xs leading-5 text-gray-700"
+                class="m-0 text-xs tracking-[0.12em] text-gray-500 uppercase min-[900px]:text-[0.625rem]"
               >
-                {work.achievement}
+                Awards
               </p>
               <ul
-                class="mt-5 mb-0 flex list-none flex-wrap gap-x-4 gap-y-1 p-0 text-xs text-gray-500"
-                aria-label={`${work.title}の使用技術`}
+                class="mt-2 mb-0 list-none space-y-1 p-0 text-sm leading-6 min-[900px]:mt-1 min-[900px]:text-[0.7rem] min-[900px]:leading-5"
               >
-                {work.technologies.map((technology) => <li>{technology}</li>)}
+                {
+                  featuredWork.awards.map((award) => (
+                    <li>{award}</li>
+                  ))
+                }
               </ul>
-              <a
-                class="group mt-8 inline-flex w-fit items-center gap-3 text-sm text-black no-underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
-                href={work.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span
-                  class="border-b border-black/30 pb-1 transition-colors group-hover:border-black"
-                >
-                  {work.linkLabel}
-                </span>
-                <span
-                  class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  aria-hidden="true">↗</span
-                >
-              </a>
             </div>
-          </article>
-        ))
-      }
+
+            <a
+              class="group mt-10 inline-flex w-fit items-center gap-3 text-sm text-black no-underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black min-[900px]:mt-4 min-[900px]:text-xs"
+              href="#career-section-title"
+            >
+              <span
+                class="border-b border-black/30 pb-1 transition-colors group-hover:border-black"
+              >
+                受賞歴を見る
+              </span>
+              <span
+                class="transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true">↓</span
+              >
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <div class="grid grid-cols-1 min-[760px]:grid-cols-2">
+        {
+          otherWorks.map((work, index) => (
+            <article
+              class:list={[
+                "flex min-w-0 flex-col py-10 min-[760px]:py-12 min-[900px]:grid min-[900px]:grid-cols-[minmax(9rem,0.8fr)_minmax(0,1.2fr)] min-[900px]:items-center min-[900px]:gap-5 min-[900px]:py-5",
+                index === 0
+                  ? "border-b border-black/10 min-[760px]:border-r min-[760px]:border-b-0 min-[760px]:pr-8 min-[900px]:pr-[clamp(1.5rem,3vw,3.5rem)]"
+                  : "min-[760px]:pl-8 min-[900px]:pl-[clamp(1.5rem,3vw,3.5rem)]",
+              ]}
+            >
+              <div
+                class:list={[
+                  "work-preview relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-[#f1f0eb] min-[900px]:rounded-xl",
+                  `${work.preview}-preview`,
+                ]}
+                aria-hidden="true"
+              >
+                {work.preview === "pixelart" ? (
+                  <div class="pixelart-preview__inner">
+                    <div class="pixelart-preview__bar">
+                      <span>IMAGE</span>
+                      <span>PIXEL</span>
+                    </div>
+                    <div class="pixelart-preview__stage">
+                      <div class="pixelart-preview__source">
+                        <span class="pixelart-preview__sun" />
+                        <span class="pixelart-preview__mountain pixelart-preview__mountain--back" />
+                        <span class="pixelart-preview__mountain pixelart-preview__mountain--front" />
+                      </div>
+                      <span class="pixelart-preview__arrow">→</span>
+                      <div class="pixelart-preview__result">
+                        {Array.from({ length: 48 }).map(() => <span />)}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div class="agents-preview__inner">
+                    <p>INDEPENDENT AGENTS / NETWORK</p>
+                    <div class="agents-preview__network">
+                      <span class="agents-preview__line agents-preview__line--one" />
+                      <span class="agents-preview__line agents-preview__line--two" />
+                      <span class="agents-preview__line agents-preview__line--three" />
+                      <span class="agents-preview__node agents-preview__node--one">
+                        01
+                      </span>
+                      <span class="agents-preview__node agents-preview__node--two">
+                        02
+                      </span>
+                      <span class="agents-preview__node agents-preview__node--three">
+                        03
+                      </span>
+                      <span class="agents-preview__center">LLM</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <div class="flex min-w-0 flex-1 flex-col pt-6 min-[900px]:pt-0">
+                <p
+                  class="m-0 text-xs tracking-[0.16em] text-gray-500 uppercase min-[900px]:text-[0.625rem]"
+                >
+                  {work.year} / {work.category}
+                </p>
+                <h3
+                  class="mt-3 mb-0 text-2xl leading-tight font-normal min-[900px]:mt-2 min-[900px]:text-lg"
+                >
+                  {work.title}
+                </h3>
+                <p
+                  class="mt-4 mb-0 text-sm leading-7 text-gray-700 min-[900px]:mt-2 min-[900px]:line-clamp-2 min-[900px]:text-[0.7rem] min-[900px]:leading-5"
+                >
+                  {work.description}
+                </p>
+                <p
+                  class="mt-5 mb-0 rounded-xl bg-[#f6f5f1] px-4 py-3 text-xs leading-5 text-gray-700 min-[900px]:mt-3 min-[900px]:rounded-lg min-[900px]:px-3 min-[900px]:py-2 min-[900px]:text-[0.625rem] min-[900px]:leading-4"
+                >
+                  {work.achievement}
+                </p>
+                <ul
+                  class="mt-5 mb-0 flex list-none flex-wrap gap-x-4 gap-y-1 p-0 text-xs text-gray-500 min-[900px]:mt-2 min-[900px]:gap-x-2 min-[900px]:text-[0.625rem]"
+                  aria-label={`${work.title}の使用技術`}
+                >
+                  {work.technologies.map((technology) => <li>{technology}</li>)}
+                </ul>
+                <a
+                  class="group mt-8 inline-flex w-fit items-center gap-3 text-sm text-black no-underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black min-[900px]:mt-3 min-[900px]:text-xs"
+                  href={work.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span
+                    class="border-b border-black/30 pb-1 transition-colors group-hover:border-black"
+                  >
+                    {work.linkLabel}
+                  </span>
+                  <span
+                    class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    aria-hidden="true">↗</span
+                  >
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
@@ -458,6 +479,25 @@ const otherWorks = [
 
   .agents-preview__line--three {
     rotate: 140deg;
+  }
+
+  @media (min-width: 900px) {
+    .pixelart-preview__inner,
+    .agents-preview__inner {
+      padding: 0.75rem;
+    }
+
+    .pixelart-preview__bar,
+    .agents-preview__inner > p {
+      font-size: 0.4375rem;
+      letter-spacing: 0.1em;
+    }
+
+    .agents-preview__center,
+    .agents-preview__node {
+      width: clamp(1.75rem, 3vw, 2.5rem);
+      font-size: 0.5rem;
+    }
   }
 
   @media (max-width: 520px) {
