@@ -2,6 +2,7 @@
 import CareerSection from "../components/CareerSection.astro";
 import Footer from "../components/Footer.astro";
 import PresentationsSection from "../components/PresentationsSection.svelte";
+import ScrollNavigation from "../components/ScrollNavigation.astro";
 import SelfIntroduction from "../components/SelfIntroduction.astro";
 import "../styles/global.css";
 ---
@@ -27,6 +28,7 @@ import "../styles/global.css";
     class="m-0 min-h-full w-full overflow-x-hidden bg-white font-['M_PLUS_Rounded_1c',sans-serif] text-[#121212]"
   >
     <SelfIntroduction />
+    <ScrollNavigation />
     <CareerSection />
     <PresentationsSection client:visible />
     <Footer />

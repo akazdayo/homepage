@@ -1,0 +1,51 @@
+<a
+  href="#career"
+  class="group pointer-events-none invisible fixed bottom-6 left-1/2 z-40 hidden -translate-x-1/2 flex-col items-center gap-1 rounded-full px-4 py-2 text-xs tracking-[0.12em] text-black/60 opacity-0 min-[900px]:flex hover:text-black focus-visible:text-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black data-[visible]:pointer-events-auto data-[visible]:visible data-[visible]:opacity-100"
+  aria-label="次のセクションへスクロール"
+  data-scroll-navigation
+>
+  <span>SCROLL</span>
+  <svg
+    class="size-6"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="m6 9 6 6 6-6"></path>
+  </svg>
+</a>
+
+<script>
+  const scrollNavigation = document.querySelector<HTMLElement>(
+    "[data-scroll-navigation]",
+  );
+
+  const updateScrollNavigation = () => {
+    scrollNavigation?.toggleAttribute("data-visible", window.scrollY <= 1);
+  };
+
+  updateScrollNavigation();
+  window.addEventListener("scroll", updateScrollNavigation, { passive: true });
+</script>
+
+<style>
+  [data-scroll-navigation] {
+    transition-property: opacity, color, visibility;
+    transition-duration: 300ms, 300ms, 0s;
+    transition-delay: 0s, 0s, 300ms;
+  }
+
+  [data-scroll-navigation][data-visible] {
+    transition-delay: 0s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-scroll-navigation] {
+      transition: none;
+    }
+  }
+</style>
