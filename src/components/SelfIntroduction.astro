@@ -2,7 +2,13 @@
 import { Icon } from "astro-icon/components";
 import { allMessages } from "./ClickMessages/clickMessage";
 
-const icons = [
+type InterestIcon = {
+  name: string;
+  icon: string;
+  href?: string;
+};
+
+const icons: InterestIcon[] = [
   {
     name: "NixOS",
     icon: "simple-icons:nixos",
@@ -16,10 +22,6 @@ const icons = [
     icon: "simple-icons:typescript",
   },
   {
-    name: "Python",
-    icon: "simple-icons:python",
-  },
-  {
     name: "Linux",
     icon: "simple-icons:linux",
   },
@@ -30,12 +32,19 @@ const icons = [
   {
     name: "VRChat",
     icon: "simple-icons:vrchat",
+    href: "https://vrchat.com/home/user/usr_147c64e3-c273-4928-9f61-df5d58deda08",
   },
   {
     name: "Twitter",
     icon: "simple-icons:twitter",
+    href: "https://twitter.com/akazdango",
   },
-] as const;
+  {
+    name: "GitHub",
+    icon: "simple-icons:github",
+    href: "https://github.com/akazdayo",
+  },
+];
 ---
 
 <main
@@ -75,19 +84,32 @@ const icons = [
         aria-label="興味のある技術とサービス"
       >
         {
-          icons.map(({ name, icon }, index) => (
+          icons.map(({ name, icon, href }, index) => (
             <li class="flex aspect-square items-center justify-center">
-              <button
-                type="button"
-                class="flex size-full cursor-pointer items-center justify-center rounded-box transition-[background-color,transform] hover:bg-base-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-content"
-                title={`${name}について見る`}
-                aria-label={`${name}について見る`}
-                aria-haspopup="dialog"
-                aria-controls={`interest-modal-${index}`}
-                data-modal-target={`interest-modal-${index}`}
-              >
-                <Icon name={icon} class="block size-9" aria-hidden="true" />
-              </button>
+              {href ? (
+                <a
+                  href={href}
+                  class="flex size-full cursor-pointer items-center justify-center rounded-box transition-[background-color,transform] hover:bg-base-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-content"
+                  title={name}
+                  aria-label={name}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <Icon name={icon} class="block size-9" aria-hidden="true" />
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  class="flex size-full cursor-pointer items-center justify-center rounded-box transition-[background-color,transform] hover:bg-base-200 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-base-content"
+                  title={`${name}について見る`}
+                  aria-label={`${name}について見る`}
+                  aria-haspopup="dialog"
+                  aria-controls={`interest-modal-${index}`}
+                  data-modal-target={`interest-modal-${index}`}
+                >
+                  <Icon name={icon} class="block size-9" aria-hidden="true" />
+                </button>
+              )}
             </li>
           ))
         }
@@ -128,43 +150,45 @@ const icons = [
   </section>
 
   {
-    icons.map(({ name, icon }, index) => (
-      <dialog
-        id={`interest-modal-${index}`}
-        class="modal"
-        aria-labelledby={`interest-modal-title-${index}`}
-      >
-        <div class="modal-box bg-base-100 text-base-content">
-          <div class="flex items-center gap-4">
-            <div class="flex size-12 shrink-0 items-center justify-center rounded-box bg-base-200">
-              <Icon name={icon} class="block size-7" aria-hidden="true" />
+    icons.map(({ name, icon, href }, index) =>
+      href ? null : (
+        <dialog
+          id={`interest-modal-${index}`}
+          class="modal"
+          aria-labelledby={`interest-modal-title-${index}`}
+        >
+          <div class="modal-box bg-base-100 text-base-content">
+            <div class="flex items-center gap-4">
+              <div class="flex size-12 shrink-0 items-center justify-center rounded-box bg-base-200">
+                <Icon name={icon} class="block size-7" aria-hidden="true" />
+              </div>
+              <h2
+                id={`interest-modal-title-${index}`}
+                class="m-0 text-xl font-medium"
+              >
+                {name}
+              </h2>
             </div>
-            <h2
-              id={`interest-modal-title-${index}`}
-              class="m-0 text-xl font-medium"
-            >
-              {name}
-            </h2>
+            <div
+              class="markdown-content mt-5"
+              set:html={allMessages[name].content}
+            />
+            <div class="modal-action">
+              <form method="dialog">
+                <button type="submit" class="btn btn-neutral">
+                  閉じる
+                </button>
+              </form>
+            </div>
           </div>
-          <div
-            class="markdown-content mt-5"
-            set:html={allMessages[name].content}
-          ></div>
-          <div class="modal-action">
-            <form method="dialog">
-              <button type="submit" class="btn btn-neutral">
-                閉じる
-              </button>
-            </form>
-          </div>
-        </div>
-        <form method="dialog" class="modal-backdrop">
-          <button type="submit" aria-label={`${name}のモーダルを閉じる`}>
-            閉じる
-          </button>
-        </form>
-      </dialog>
-    ))
+          <form method="dialog" class="modal-backdrop">
+            <button type="submit" aria-label={`${name}のモーダルを閉じる`}>
+              閉じる
+            </button>
+          </form>
+        </dialog>
+      ),
+    )
   }
 </main>
 

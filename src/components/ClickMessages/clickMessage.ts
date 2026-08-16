@@ -1,11 +1,8 @@
 import * as linuxMessage from "./linux.md";
 import * as nixosMessage from "./nixos.md";
-import * as pythonMessage from "./python.md";
 import * as rustMessage from "./rust.md";
-import * as twitterMessage from "./twitter.md";
 import * as typescriptMessage from "./typescript.md";
 import * as vimMessage from "./vim.md";
-import * as vrchatMessage from "./vrchat.md";
 
 type IconMessage = {
   content: string;
@@ -15,12 +12,9 @@ export type Icons = Record<string, IconMessage>;
 const allImports = [
   linuxMessage,
   nixosMessage,
-  pythonMessage,
   rustMessage,
-  twitterMessage,
   typescriptMessage,
   vimMessage,
-  vrchatMessage,
 ];
 
 export const allMessages: Icons = Object.fromEntries(
