@@ -1,12 +1,11 @@
 const presentationsPath = "/api/presentations";
-const browserCacheTtlSeconds = 60;
-const edgeCacheTtlSeconds = 10 * 60;
+const presentationsCacheTtlSeconds = 24 * 60 * 60;
 const staleWhileRevalidateSeconds = 60 * 60;
 
 const presentationResponseHeaders = (upstream?: Response) => {
   const headers = new Headers({
-    "Cache-Control": `public, max-age=${browserCacheTtlSeconds}, stale-while-revalidate=${staleWhileRevalidateSeconds}`,
-    "Cloudflare-CDN-Cache-Control": `public, max-age=${edgeCacheTtlSeconds}, stale-while-revalidate=${staleWhileRevalidateSeconds}`,
+    "Cache-Control": `public, max-age=${presentationsCacheTtlSeconds}, stale-while-revalidate=${staleWhileRevalidateSeconds}`,
+    "Cloudflare-CDN-Cache-Control": `public, max-age=${presentationsCacheTtlSeconds}, stale-while-revalidate=${staleWhileRevalidateSeconds}`,
     "Content-Type": "application/json; charset=utf-8",
     "X-Content-Type-Options": "nosniff",
   });
@@ -19,7 +18,10 @@ const presentationResponseHeaders = (upstream?: Response) => {
   return headers;
 };
 
-const proxyPresentations = async (request: Request, env: Env): Promise<Response> => {
+const proxyPresentations = async (
+  request: Request,
+  env: Env,
+): Promise<Response> => {
   if (request.method !== "GET" && request.method !== "HEAD") {
     return Response.json(
       { error: "Method not allowed" },
@@ -40,7 +42,7 @@ const proxyPresentations = async (request: Request, env: Env): Promise<Response>
       cf: {
         cacheEverything: true,
         cacheTtlByStatus: {
-          "200-299": edgeCacheTtlSeconds,
+          "200-299": presentationsCacheTtlSeconds,
           "300-599": -1,
         },
       },
@@ -81,7 +83,9 @@ const proxyPresentations = async (request: Request, env: Env): Promise<Response>
     );
 
     return new Response(
-      request.method === "HEAD" ? null : JSON.stringify({ error: "Unable to load presentations" }),
+      request.method === "HEAD"
+        ? null
+        : JSON.stringify({ error: "Unable to load presentations" }),
       {
         status: 502,
         headers: {
