@@ -1,18 +1,28 @@
 ---
+type Period = {
+  year: number;
+  month?: number;
+  day?: number;
+};
+
 type Career = {
-  period: Date;
+  period: Period;
   title: string;
 }[];
 
-const createPeriod = (year: number, month = 1, day = 1) =>
-  new Date(Date.UTC(year, month - 1, day));
-const formatPeriod = (period: Date) =>
-  new Intl.DateTimeFormat("en-GB", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(period);
+const createPeriod = (year: number, month?: number, day?: number): Period => ({
+  year,
+  month,
+  day,
+});
+const formatPeriod = ({ year, month, day }: Period) => {
+  let label = String(year);
+  if (month !== undefined) {
+    label += `-${String(month).padStart(2, "0")}`;
+    if (day !== undefined) label += `-${String(day).padStart(2, "0")}`;
+  }
+  return label;
+};
 
 const career: Career = [
   {
@@ -86,7 +96,10 @@ const career: Career = [
 ];
 
 const sortedCareer = [...career].sort(
-  (a, b) => b.period.getTime() - a.period.getTime(),
+  (a, b) =>
+    b.period.year - a.period.year ||
+    (b.period.month ?? 0) - (a.period.month ?? 0) ||
+    (b.period.day ?? 0) - (a.period.day ?? 0),
 );
 
 const visibleCareerCount = 4;
