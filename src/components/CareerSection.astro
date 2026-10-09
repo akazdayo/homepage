@@ -2,7 +2,6 @@
 type Career = {
   period: Date;
   title: string;
-  description: string;
 }[];
 
 const createPeriod = (year: number, month = 1, day = 1) =>
@@ -19,94 +18,70 @@ const career: Career = [
   {
     period: createPeriod(2026, 9, 12),
     title: "セキュリティ・キャンプ2026ミニ（愛知開催）",
-    description: "セキュリティ・キャンプ2026ミニ（愛知開催）に参加。",
   },
   {
     period: createPeriod(2026, 6),
     title: "西澤育英基金 2026年度採択",
-    description: "西澤育英基金の2026年度奨学生に採択されました。",
   },
   {
     period: createPeriod(2026, 6),
     title: "SecHack365 2026年度 世界観駆動コース採択",
-    description: "SecHack365の2026年度世界観駆動コースに採択されました。",
   },
   {
     period: createPeriod(2026, 2, 17),
     title: "動くWebアプリコンテスト 2025 冬",
-    description:
-      "角川ドワンゴ学園のコンテストで、作品「PixelArt-Converter」により優秀賞を受賞。",
   },
   {
     period: createPeriod(2025, 12, 7),
     title: "技育博2025 Vol. 5",
-    description:
-      "サポーターズ主催。作品「MRSTUDY」で株式会社サイバーエージェント賞、ウイングアーク1st株式会社賞を受賞。",
   },
   {
     period: createPeriod(2025, 11, 30),
     title: "未踏ジュニア スーパークリエータ認定",
-    description:
-      "Mitou Junior.の2025年度でスーパークリエータに認定されました。",
   },
   {
     period: createPeriod(2025, 6),
     title: "Hack 1 グランプリ",
-    description: "HackathonのHack 1 グランプリで日テレ賞を受賞。",
   },
   {
     period: createPeriod(2025, 6),
     title: "Coyote AI Competition",
-    description:
-      "名古屋大学非公認サークルjack主催のCoyote AI Competitionで準優勝。AIの社会実装をテーマに企画・開発。",
   },
   {
     period: createPeriod(2025, 5),
     title: "未踏ジュニア 25年度採択",
-    description:
-      "未踏ジュニアに採択。独立したLLMエージェントを複数体連携させ、会話することができるバックエンドフレームワークを開発。",
   },
   {
     period: createPeriod(2025, 5),
     title: "Hack with AI",
-    description: "Hackathonで、生成AIを活用したプロダクトにより準優勝。",
   },
   {
     period: createPeriod(2025, 3),
     title: "Garage Challenge 5th",
-    description: "HackathonのGarage Challenge 5thに参加。",
   },
   {
     period: createPeriod(2025, 2, 15),
     title: "Open Hack U 2025 Nagoya",
-    description:
-      "Hackathonで最優秀賞、HappyHacking賞を受賞。LLMを用いた物理問題可視化Webアプリを開発。",
   },
   {
     period: createPeriod(2025, 1),
     title: "Startup Dragongate 2025",
-    description: "HackathonのStartup Dragongate 2025に参加。",
   },
   {
     period: createPeriod(2025, 4, 1),
     title: "N高等学校",
-    description: "",
   },
   {
     period: createPeriod(2024, 12),
     title: "Hack the Nagoya",
-    description: "HackathonのHack the Nagoyaに参加。",
   },
   {
     period: createPeriod(2023),
     title: "アプリ甲子園",
-    description:
-      "アプリ甲子園23年度で一次選考を突破し、プロダクトの完成度を評価された。",
   },
   {
     period: createPeriod(2025, 3, 31),
     title: "N中等部",
-    description: "N中等部を卒業。オンラインでプログラミングを沢山学びました。",
   },
 ];
 
@@ -150,7 +125,7 @@ const visibleCareerCount = 4;
         aria-label="経歴"
       >
         {
-          sortedCareer.map(({ period, title, description }, index) => {
+          sortedCareer.map(({ period, title }, index) => {
             const label = formatPeriod(period);
             const isExtra = index >= visibleCareerCount;
 
@@ -170,11 +145,6 @@ const visibleCareerCount = 4;
                 <div class="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <h3 class="m-0 text-xl leading-tight font-normal">{title}</h3>
                 </div>
-                {description && (
-                  <p class="m-0 mt-3 text-sm leading-7 text-gray-700">
-                    {description}
-                  </p>
-                )}
               </li>
             );
           })
