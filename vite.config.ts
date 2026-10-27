@@ -1,6 +1,9 @@
 import { defineConfig } from "vite-plus";
 
 export default defineConfig({
+  staged: {
+    "*": "vp check --fix",
+  },
   fmt: {
     ignorePatterns: [".astro/**", ".direnv/**", ".wrangler/**", "dist/**"],
   },
