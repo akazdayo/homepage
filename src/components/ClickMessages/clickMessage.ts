@@ -9,13 +9,7 @@ type IconMessage = {
   frontmatter: Record<string, any>;
 };
 export type Icons = Record<string, IconMessage>;
-const allImports = [
-  linuxMessage,
-  nixosMessage,
-  rustMessage,
-  typescriptMessage,
-  vimMessage,
-];
+const allImports = [linuxMessage, nixosMessage, rustMessage, typescriptMessage, vimMessage];
 
 export const allMessages: Icons = Object.fromEntries(
   await Promise.all(

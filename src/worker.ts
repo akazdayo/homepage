@@ -18,10 +18,7 @@ const presentationResponseHeaders = (upstream?: Response) => {
   return headers;
 };
 
-const proxyPresentations = async (
-  request: Request,
-  env: Env,
-): Promise<Response> => {
+const proxyPresentations = async (request: Request, env: Env): Promise<Response> => {
   if (request.method !== "GET" && request.method !== "HEAD") {
     return Response.json(
       { error: "Method not allowed" },
@@ -83,9 +80,7 @@ const proxyPresentations = async (
     );
 
     return new Response(
-      request.method === "HEAD"
-        ? null
-        : JSON.stringify({ error: "Unable to load presentations" }),
+      request.method === "HEAD" ? null : JSON.stringify({ error: "Unable to load presentations" }),
       {
         status: 502,
         headers: {

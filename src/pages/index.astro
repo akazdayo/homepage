@@ -1,42 +1,16 @@
 ---
+import RootLayout from "../layouts/RootLayout.astro";
 import CareerSection from "../components/CareerSection.astro";
 import Footer from "../components/Footer.astro";
 import PresentationsSection from "../components/PresentationsSection.svelte";
 import ScrollNavigation from "../components/ScrollNavigation.astro";
 import SelfIntroduction from "../components/SelfIntroduction.astro";
-import "../styles/global.css";
 ---
 
-<!doctype html>
-<html lang="ja" class="min-h-full w-full bg-white">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="ほーむぺーじかも!" />
-    <meta name="theme-color" content="#ffffff" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400&display=swap"
-    />
-    <title>あかずのほーむぺーじ!</title>
-  </head>
-  <body
-    class="m-0 min-h-full w-full overflow-x-hidden bg-white font-['M_PLUS_Rounded_1c',sans-serif] text-[#121212]"
-  >
-    <SelfIntroduction />
-    <ScrollNavigation />
-    <CareerSection />
-    <PresentationsSection client:visible />
-    <Footer />
-  </body>
-</html>
-
-<style is:global>
-  html {
-    font-size: 120%;
-  }
-</style>
+<RootLayout>
+  <SelfIntroduction />
+  <ScrollNavigation />
+  <CareerSection />
+  <PresentationsSection client:visible />
+  <Footer />
+</RootLayout>
