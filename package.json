@@ -30,7 +30,7 @@
     "daisyui": "^5.7.50",
     "vite": "catalog:",
     "vite-plus": "catalog:",
-    "wrangler": "^4.110.0"
+    "wrangler": "^4.152.0"
   },
   "devEngines": {
     "packageManager": {
